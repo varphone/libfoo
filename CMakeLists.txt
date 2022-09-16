@@ -10,7 +10,7 @@ string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 
 include(GNUInstallDirs)
 
-add_library(${PROJECT_NAME} SHARED src/foo.cpp)
+add_library(${PROJECT_NAME} src/foo.cpp)
 
 target_include_directories(${PROJECT_NAME}
     INTERFACE PUBLIC
