@@ -38,10 +38,14 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${MY_NS}
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(FILES
-    $<TARGET_PDB_FILE:${PROJECT_NAME}>
-    DESTINATION ${CMAKE_INSTALL_BINDIR} OPTIONAL
-)
+# Install pdb files for msvc toolchain
+get_target_property(TARGET_TYPE ${PROJECT_NAME} TYPE)
+if (MSVC AND NOT TARGET_TYPE STREQUAL "STATIC_LIBRARY")
+    install(FILES
+        $<TARGET_PDB_FILE:${PROJECT_NAME}>
+        DESTINATION ${CMAKE_INSTALL_BINDIR} OPTIONAL
+    )
+endif()
 
 # Export targets
 install(EXPORT ${PROJECT_NAME}-targets
