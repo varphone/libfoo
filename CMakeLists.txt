@@ -2,11 +2,21 @@ cmake_minimum_required(VERSION 3.21)
 
 project(foo VERSION 1.0.0 LANGUAGES CXX)
 
-set(MY_NS ${PROJECT_NAME})
+if(NOT DEFINED MY_NS)
+    set(MY_NS ${PROJECT_NAME})
+endif()
+
+string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 
 include(GNUInstallDirs)
 
 add_library(${PROJECT_NAME} SHARED src/foo.cpp)
+
+target_include_directories(${PROJECT_NAME}
+    INTERFACE PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 # Generate API decl header
 include(GenerateExportHeader)

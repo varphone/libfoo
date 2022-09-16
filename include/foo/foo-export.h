@@ -1,18 +1,18 @@
 
-#ifndef _EXPORT_H
-#define _EXPORT_H
+#ifndef FOO_EXPORT_H
+#define FOO_EXPORT_H
 
 #ifdef FOO_STATIC_DEFINE
-#  define _EXPORT
+#  define FOO_EXPORT
 #  define FOO_NO_EXPORT
 #else
-#  ifndef _EXPORT
+#  ifndef FOO_EXPORT
 #    ifdef foo_EXPORTS
         /* We are building this library */
-#      define _EXPORT __declspec(dllexport)
+#      define FOO_EXPORT __declspec(dllexport)
 #    else
         /* We are using this library */
-#      define _EXPORT __declspec(dllimport)
+#      define FOO_EXPORT __declspec(dllimport)
 #    endif
 #  endif
 
@@ -26,7 +26,7 @@
 #endif
 
 #ifndef FOO_DEPRECATED_EXPORT
-#  define FOO_DEPRECATED_EXPORT _EXPORT FOO_DEPRECATED
+#  define FOO_DEPRECATED_EXPORT FOO_EXPORT FOO_DEPRECATED
 #endif
 
 #ifndef FOO_DEPRECATED_NO_EXPORT
@@ -39,4 +39,4 @@
 #  endif
 #endif
 
-#endif /* _EXPORT_H */
+#endif /* FOO_EXPORT_H */
